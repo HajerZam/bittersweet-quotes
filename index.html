@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bittersweet Quote of the Day</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+    :root {
+      --color-1: #a3c7e0;
+      --color-2: #6fa3d8;
+      --color-3: #4c8ac8;
+      --color-4: #2e6cb8;
+      --color-5: #1c4b8d;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, var(--color-1), var(--color-3));
+      overflow: hidden;
+    }
+    .quote-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 1s ease, floatUpDown 4s ease-in-out infinite;
+    }
+    .quote {
+      font-size: 1.8rem;
+      color: var(--color-5);
+      margin-bottom: 1rem;
+    }
+    .author {
+      font-size: 1rem;
+      color: var(--color-4);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatUpDown {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <audio id="bgm" loop>
+        <source src="music_file/scott-buckley-filaments (1).mp3" type="audio/mpeg">
+    </audio>
+
+
+  <div class="quote-box">
+    <div class="quote" id="quote">"Loading bittersweet words..."</div>
+    <div class="author" id="author"></div>
+  </div>
+
+  <script>
+    const quotes = [
+      { text: "The pain of parting is nothing to the joy of meeting again.", author: "Charles Dickens" },
+      { text: "Every ending is a new beginning, we just don't know it at the time.", author: "Unknown" },
+      { text: "Don't cry because it's over, smile because it happened.", author: "Dr. Seuss" },
+      { text: "The bittersweet between my teeth, trying to find the in-between.", author: "Passion Pit" },
+      { text: "We enjoy warmth because we have been cold. We appreciate light because we have been in darkness.", author: "David Weatherford" },
+      { text: "Some of the most beautiful things we have in life come from our mistakes.", author: "Surprise Inside" },
+      { text: "Bittersweet memories, that is all I'm taking with me.", author: "Whitney Houston" },
+      { text: "How lucky I am to have something that makes saying goodbye so hard.", author: "A.A. Milne" },
+      { text: "It's so hard to leave—until you leave. And then it’s the easiest thing in the world.", author: "John Green" },
+      { text: "Sometimes we must undergo hardships, breakups, and narcissistic wounds, which shatter the flattering image that we had of ourselves, in order to discover two truths: that we are not who we thought we were; and that the loss of a cherished pleasure is not necessarily the loss of true happiness and well-being.", author: "Jean-Yves Leloup" }
+    ];
+
+    function showQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quote').textContent = '"' + quotes[randomIndex].text + '"';
+      document.getElementById('author').textContent = '- ' + quotes[randomIndex].author;
+    }
+
+    window.onload = function() {
+      showQuote();
+      setTimeout(() => {
+        if (confirm("Would you like to enable ambient music?")) {
+          document.getElementById('bgm').play().catch(err => console.log('Playback error:', err));
+        }
+      }, 500);
+    };
+  </script>
+</body>
+</html>
